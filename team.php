@@ -9,12 +9,6 @@
 </head>
 
 <body>
-	<form action="date.php" method="post">
-		<p>choose event date</p>
-		<input  type="date" name="date">
-
-		<button type ="submit" class="btn btn-info m-1">check date</button>
-	</form>
 
 	<table>
 		<thead>
@@ -27,22 +21,22 @@
 		</thead>
 		<tbody>
 <?php
-	
-	$sql = "SELECT sport_event.sport_event_id, sport_event.start_date_time, sport.sport_name, t.team_name home, f.team_name guest  
+	if ($_GET) 
+	{
+		$team = $_GET['team'];
+
+	$team_name_sql = "SELECT sport_event.sport_event_id, sport_event.start_date_time, sport.sport_name, t.team_name home, f.team_name guest  
 			FROM sport_event
 			JOIN team t ON t.team_id = sport_event._fk_team_home
 			JOIN team f ON f.team_id = sport_event._fk_team_guest
 			JOIN league ON f._fk_league_id = league.league_id
 			JOIN sport ON league._fk_sport_id = sport.sport_id
-			ORDER BY sport_event.start_date_time;";
+			WHERE t.team_name = '$team' OR f.team_name = '$team';";
 
-	$result = mysqli_query($connect, $sql);
+		$team_name_result = mysqli_query($connect, $team_name_sql);	
 
-	$sport_sql = "SELECT sport_name FROM sport GROUP BY sport_name;";
-	$sport_result = mysqli_query($connect, $sport_sql);
-
-      if ($result->num_rows > 0) {
-      while($row = $result->fetch_assoc()) 
+      if ($team_name_result->num_rows > 0) {
+      while($row = $team_name_result->fetch_assoc()) 
 				{
 					echo "<tr>
 							<td>" . date("D, d.m.Y, H:i", strtotime($row['start_date_time'])) . "</td>
@@ -61,14 +55,8 @@
 
 	<a href= "create.php"><button type="button" class="btn btn-info">Add event</button></a>
 
-	<div>
-		<?php
-		 while($row = $sport_result->fetch_assoc()) 
-		{
-			echo "<a href='/sportradar_coding_session/sport.php?sport=" . $row['sport_name'] . "'>" . $row['sport_name'] . "</a>";	
-		}
-		?>
-	</div>
 
 </body>
 </html>
+
+<?php } ?>
