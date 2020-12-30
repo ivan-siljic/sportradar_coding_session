@@ -1,74 +1,53 @@
 <?php
 	require_once 'db_connect.php';
+
+	include 'head.php';
+
+	include 'choose_date.php';
 ?>
+		<div class="row">
+			<div class="d-lg-none col-5 col-md-4 mt-5">
+				<?php include 'sidebar_sport.php'; ?>
+			</div>	
+		</div>
 
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Sport Events Calendar</title>
-</head>
+		<div class="row">
+			<div class="col-8">
+				
+				<div class="row text-end my-3">
+					<a href= "create.php" class="link-secondary">Add event</a>
+				</div>
+				<table class="table">
+						<?php
+						
+						$sql = "SELECT sport_event.sport_event_id, sport_event.start_date_time, sport.sport_name, t.team_name home, f.team_name guest  
+								FROM sport_event
+								JOIN team t ON t.team_id = sport_event._fk_team_home
+								JOIN team f ON f.team_id = sport_event._fk_team_guest
+								JOIN league ON f._fk_league_id = league.league_id
+								JOIN sport ON league._fk_sport_id = sport.sport_id
+								ORDER BY sport_event.start_date_time;";
 
-<body>
-	<form action="date.php" method="post">
-		<p>choose event date</p>
-		<input  type="date" name="date">
+						$result = mysqli_query($connect, $sql);
 
-		<button type ="submit" class="btn btn-info m-1">check date</button>
-	</form>
+					    include 'table.php';
+							
+						?>				
+				</table>
 
-	<table>
-		<thead>
-			<tr>
-				<th>Datetime</th>
-				<th>Sport</th>
-				<th>Home</th>
-				<th>Guests</th>
-			</tr>
-		</thead>
-		<tbody>
-<?php
-	
-	$sql = "SELECT sport_event.sport_event_id, sport_event.start_date_time, sport.sport_name, t.team_name home, f.team_name guest  
-			FROM sport_event
-			JOIN team t ON t.team_id = sport_event._fk_team_home
-			JOIN team f ON f.team_id = sport_event._fk_team_guest
-			JOIN league ON f._fk_league_id = league.league_id
-			JOIN sport ON league._fk_sport_id = sport.sport_id
-			ORDER BY sport_event.start_date_time;";
+		</div>
 
-	$result = mysqli_query($connect, $sql);
-
-	$sport_sql = "SELECT sport_name FROM sport GROUP BY sport_name;";
-	$sport_result = mysqli_query($connect, $sport_sql);
-
-      if ($result->num_rows > 0) {
-      while($row = $result->fetch_assoc()) 
-				{
-					echo "<tr>
-							<td>" . date("D, d.m.Y, H:i", strtotime($row['start_date_time'])) . "</td>
-							<td>" . $row['sport_name'] . "</td>
-							<td>" . $row['home'] . "</td>
-							<td>" . $row['guest'] . "</td>
-							<td><a href='/sportradar_coding_session/event.php?id=" . $row['sport_event_id'] . "'>choose</a></td>
-							</tr>";
-				}
-		}
-		else { echo "No data available.";}
 		
-?>
-		</tbody>
-	</table>
+		<div class="d-none d-lg-block col-lg-3 col-xl-2 m-3">
+			<?php include 'sidebar_sport.php'; ?>
+		</div>	
+	
 
-	<a href= "create.php"><button type="button" class="btn btn-info">Add event</button></a>
-
-	<div>
-		<?php
-		 while($row = $sport_result->fetch_assoc()) 
-		{
-			echo "<a href='/sportradar_coding_session/sport.php?sport=" . $row['sport_name'] . "'>" . $row['sport_name'] . "</a>";	
-		}
-		?>
+	<?php include 'footer.php'; ?>
+			
 	</div>
+
+</div>
 
 </body>
 </html>

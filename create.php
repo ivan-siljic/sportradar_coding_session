@@ -1,6 +1,11 @@
 <?php
-require_once 'db_connect.php';
+	require_once 'db_connect.php';
 
+	include 'head.php';
+
+?>
+
+<?php
 $team_sql = "SELECT * FROM team";
 $team_result = mysqli_query($connect, $team_sql);
 $guest_result = mysqli_query($connect, $team_sql);
@@ -12,50 +17,88 @@ $guest_result = mysqli_query($connect, $team_sql);
    <title>Create Sport Event</title>
 </head>
 <body>
-<h2 class="mt-3">Add Event</h2>
+		<div class="row my-5">
+      		<div class="col-12 col-md-8 col-xl-5 m-auto">
+        		<div class="card m-5">
 
-   <form action="./actions/a_create.php" method= "post">
-   		<table>
-            <tr>
-               <th>Date</th>
-               <td><input  type="date" name="date"  placeholder="date" /></td >
-           	</tr>
-           	<tr>
-               <th>Time</th>
-               <td><input  type="time" name="time"  placeholder="time" /></td >
-           </tr>  
-           <tr>
-           	<th>Home</th>
-           	<td><select name="home_team">
-           		<?php if ($team_result->num_rows > 0) 
-           					{
-           						while ($team_row = $team_result->fetch_assoc())
-								{
-									echo '<option value="' . $team_row["team_id"] . '">' . $team_row["team_name"] . '</option>';
-								}
-							}
-				?>
-				</select></td>
-           </tr>         	
-           <tr>
-           	<th>Guest</th>
-           	<td><select name="guest_team">
-           		<?php if ($team_result->num_rows > 0) 
-           					{           		
-           						while ($guest_row = $guest_result->fetch_assoc()) 
-           						{ 
-           		          			echo '<option value="' . $guest_row["team_id"] . '">' . $guest_row["team_name"] . '</option>';
-	       						}
-	       					}
-           		?>         		
-           	</select></td>
-           </tr>
+			   	<form action="./actions/a_create.php" method= "post">
+			   		<div class="card-header">
+                    	<h2>Create Event</h2>
+                  	</div>
+			            
+                  		<div class="p-3">
+				            <div class="form-group">
+				            	<div class="row">
+				            		<div class="col-6">
+						              	<label class="mb-1" for="date">Date</label>  
+					           			<input class="form-control border rounded bg-light p-1 text-secondary" type="date" name="date">
+				           			</div>
+			           				
+			           				<div class="col-6">
+						           		<label class="mb-1" for="time">Time</label>
+						               	<input class="form-control border rounded bg-light p-1 text-secondary" type="time" name="time">
+				               		</div>
+				           		</div>
 
-			<tr>
-               <td><button type ="submit" class="btn btn-info m-1">create event</button></td>
-               <td><a href= "index.php"><button type="button" class="btn btn-info m-1">Back</button></a></td>
-           </tr >
-       </table>
-</form>
+				           		<div class="row">
+				            		<div class="col-6 my-3">
+						           		<label class="mb-1" for="home_team">Home</label>
+						           		<select class="form-select border rounded bg-light p-1 text-secondary" name="home_team">
+						           			<option selected>Select team</option>
+							           		<?php if ($team_result->num_rows > 0) 
+							           					{
+							           						while ($team_row = $team_result->fetch_assoc())
+															{
+																echo '<option value="' . $team_row["team_id"] . '">' . $team_row["team_name"] . '</option>';
+															}
+														}
+											?>
+										</select>
+				           			</div>
+
+				           			<div class="col-6 my-3">
+						           		<label class="mb-1" for="guest_team">Guest</label>
+						           		<select class="form-select border rounded bg-light p-1 text-secondary" name="guest_team">
+						           			<option selected>Select team</option>
+							           		<?php if ($team_result->num_rows > 0) 
+							           					{           		
+							           						while ($guest_row = $guest_result->fetch_assoc()) 
+							           						{ 
+							           		          			echo '<option value="' . $guest_row["team_id"] . '">' . $guest_row["team_name"] . '</option>';
+								       						}
+								       					}
+							           		?>         		
+						           		</select>
+				           			</div>
+				           			
+								</div>
+									<hr>
+			           				<button type ="submit" class="btn btn-dark">create</button>
+			           			
+			           		</div>
+           				</div>
+  
+			            <div class="card-footer ">   
+			            	<a class="link-secondary" href=<?php $url = htmlspecialchars($_SERVER['HTTP_REFERER']);
+			            									echo $url; ?>
+			            									>Back</a>
+			            </div>
+			           
+				</form>
+
+				</div>
+  </div>
+</div>
+
+				
+<?php 	
+
+	include 'footer.php'; 
+
+?>
+</div>
+
+</div>
+
 </body>
 </html>
