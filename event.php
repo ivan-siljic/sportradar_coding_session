@@ -1,15 +1,21 @@
 <?php
 	require_once 'db_connect.php';
 
+	include_once 'classes.php';
+
+	include_once 'functions.php';
+
 	include 'head.php';
 
 	include 'choose_date.php';
+
+	
 
 					if ($_GET) 
 					{
 						$id = $_GET['id'];
 
-						$sql = "SELECT *, t.team_name home, f.team_name guest, p.first_name homie, r.first_name guestie  
+						$sql = "SELECT *, t.team_name home, f.team_name guest
 								FROM sport_event
 								JOIN team t ON t.team_id = sport_event._fk_team_home
 								JOIN team f ON f.team_id = sport_event._fk_team_guest
@@ -58,16 +64,9 @@
 
 						// for displaying in teams in sidebar
 						$sport = $row['sport_name'];
-
 					}
 
 ?>
-
-		<div class="row">
-			<div class="d-lg-none col-5 col-md-4 mt-5">
-				<?php include 'sidebar_teams.php'; ?>
-			</div>	
-		</div>
 
 		<div class="row">
 			<div class="col-8">
@@ -163,16 +162,11 @@
 					</table>
 
 				<div class="row my-5">
-					<a class="link-secondary" href=<?php $url = htmlspecialchars($_SERVER['HTTP_REFERER']);
-			            									echo $url; 
-			            									?> >Back</a>
+					<a class="link-secondary" href= <?php back(); ?> >Back</a>
 				</div>
 	
 			</div>
 
-			<div class="d-none d-lg-block col-lg-3 col-xl-2 m-3">
-				<?php include 'sidebar_teams.php'; ?>
-			</div>
 
 <?php include 'footer.php'; ?>
 	

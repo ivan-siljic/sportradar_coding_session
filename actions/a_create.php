@@ -1,6 +1,12 @@
 <?php
 
-require_once '../db_connect.php';
+	require_once '../db_connect.php';
+
+	include_once '../classes.php';
+
+	include_once '../functions.php';
+
+	include '../sidebar_sport.php';
 
 ?>
 
@@ -32,14 +38,14 @@ require_once '../db_connect.php';
 <div class="container">
 		<div class="row my-3">
 			<nav class="navbar navbar-expand-lg navbar-light">
-				  <a class="navbar-brand" href="index.php"><img src="assets/sportradar-logo.svg" alt="Sportradar Logo" height="25"></a>
+				  <a class="navbar-brand" href="../index.php"><img src="assets/sportradar-logo.svg" alt="Sportradar Logo" height="25"></a>
 				  	<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 			      	<span class="navbar-toggler-icon"></span>
 			    	</button>
 					  <div class="collapse navbar-collapse" id="navbarSupportedContent">
 					    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 					        <li class="nav-item">
-								<a class="nav-link active" href="index.php" aria-current="page">Home <span class="sr-only"></span></a>
+								<a class="nav-link active" href="../index.php" aria-current="page">Home <span class="sr-only"></span></a>
 							</li>
 							<li class="nav-item">
 								<a class="nav-link" href="https://www.sportradar.com/about-us/group-set-up/" target="_blank">About us</a>
@@ -64,61 +70,32 @@ require_once '../db_connect.php';
 			</div>
 		</div>
 
-		<div class="row">
-			<div class="d-lg-none col-5 col-md-4 mt-5">
-				<?php include '../sidebar_sport.php'; ?>
-			</div>	
-		</div>
+
+				<?php sidebar_sport_top(); ?>
+
 
 		<div class="row">
 			<div class="col-8">
 
 	<?php
-	if ($_POST) 
-	{
-		$date = $_POST['date'];
-		$time = $_POST['time'];
-		$home_team = $_POST['home_team'];
-		$guest_team =$_POST['guest_team'];
+		
+		$result = a_create();
 
-		$create_sql = "INSERT INTO sport_event(start_date_time, _fk_team_home, _fk_team_guest)
-						VALUES ('$date $time', '$home_team', '$guest_team');";
-
-		 if($connect->query($create_sql)===TRUE) {
-	        echo '<div class="row">
-	        			<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="currentColor" class="bi bi-check-circle my-5 text-muted" viewBox="0 0 16 16">
-  							<path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-  							<path d="M10.97 4.97a.235.235 0 0 0-.02.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-1.071-1.05z"/>
-						</svg>
-					</div>
-											
-					<div class="row">
-					<h1 class="text-center text-muted mt-3 mb-5">Succesfull event input!</h1></div>';
+		 if($result === TRUE) {
+	        succes( 'event' );
 	    } else {
-	        echo '<div class="row">
-						<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="currentColor" class="bi bi-x-circle my-5 text-muted" viewBox="0 0 16 16">
-  							<path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-  							<path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
-						</svg>
-					</div>
-											
-					<div class="row">
-					<h1 class="text-center text-muted mt-3 mb-5">Unsuccesfull event input!</h1></div>';
+	        fail( 'event' );
 	    }
-
-	}
+	
 	?>
 				<div class="row my-5">
-					<a class="link-secondary" href=<?php $url = htmlspecialchars($_SERVER['HTTP_REFERER']);
-			            									echo $url; 
-			            									?> >Back</a>
+					<a class="link-secondary" href= <?php back(); ?> >Back</a>
 				</div>
 
 			</div>
 
-		<div class="d-none d-lg-block col-lg-3 col-xl-2 m-3">
-			<?php include '../sidebar_sport.php'; ?>
-		</div>		
+			<?php sidebar_sport_right(); ?>
+
 		</div>
 		<footer class="my-5">	
 		

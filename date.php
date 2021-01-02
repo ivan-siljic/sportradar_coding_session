@@ -1,16 +1,18 @@
 <?php
 	require_once 'db_connect.php';
 
-	include 'head.php';
+	include_once 'classes.php';
 
-	include 'choose_date.php';
+	include_once 'functions.php';
+
+	include_once 'head.php';
+
+	include_once 'choose_date.php';
+
+	include_once 'sidebar_sport.php';
+
+	sidebar_sport_top();
 ?>
-
-		<div class="row">
-			<div class="d-lg-none col-5 col-md-4 mt-5">
-				<?php include 'sidebar_sport.php'; ?>
-			</div>	
-		</div>
 
 		<div class="row">
 			<div class="col-8">
@@ -21,42 +23,27 @@
 
 				<table class="table">
 
-				<?php
+					<?php
+							
+						$rows = date_search();
 
-					if ($_POST) 
-					{
-						$date = $_POST['date'];
-
-						$sql = "SELECT sport_event.sport_event_id, sport_event.start_date_time, sport.sport_name, t.team_name home, f.team_name guest  
-									FROM sport_event
-									JOIN team t ON t.team_id = sport_event._fk_team_home
-									JOIN team f ON f.team_id = sport_event._fk_team_guest
-									JOIN league ON f._fk_league_id = league.league_id
-									JOIN sport ON league._fk_sport_id = sport.sport_id
-									WHERE sport_event.start_date_time >= '$date 00:00:01' AND sport_event.start_date_time <= '$date 23:59:00';";
-
-						$result = mysqli_query($connect, $sql);
-					}
-
-				      include 'table.php';
+						include 'table.php';
 						
-				?>
+					?>
 
 				</table>
 
 				<div class="row my-5">
-					<a class="link-secondary" href=<?php $url = htmlspecialchars($_SERVER['HTTP_REFERER']);
-			            									echo $url; 
-			            									?> >Back</a>
+					<a class="link-secondary" href= <?php back(); ?> >Back</a>
 				</div>
-	
+				
 			</div>
+	
+<?php 
+	sidebar_sport_right();
 
-			<div class="d-none d-lg-block col-lg-3 col-xl-2 m-3">
-				<?php include 'sidebar_sport.php'; ?>
-			</div>	
-
-<?php include 'footer.php'; ?>
+	include 'footer.php'; 
+?>
 	
 		</div>
 

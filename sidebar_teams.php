@@ -1,21 +1,44 @@
-				<div class="border rounded p-3">
-					<h4>Teams</h4>
-					
-					<?php
+<?php	
 
-					$team_sql = "SELECT team_name FROM team 
-									JOIN league ON team._fk_league_id = league.league_id
-									JOIN sport ON league._fk_sport_id = sport.sport_id
-									WHERE sport.sport_name = '$sport' 
-									GROUP BY team_name;";
+	function sidebar_teams_top()
+	{
+		$sidebar_teams_top = '<div class="row">
+							<div class="d-lg-none col-5 col-md-4 mt-5">
+								<div class="border rounded p-3">
+									<h4>Teams</h4>';
+									
+									$rows = sidebar_teams();
 
-					$team_result = mysqli_query($connect, $team_sql);
+									foreach ($rows as $row)
+									{
+										$sidebar_teams_top .= "<a href='/sportradar_coding_session/team.php?team=" . $row['team_name'] . "' class='link-secondary'>" . $row['team_name'] . "</a><br>";
+									}
 
-					 while($team_row = $team_result->fetch_assoc()) 
-					{
-						echo "<a href='/sportradar_coding_session/team.php?team=" . $team_row['team_name'] . "' class='link-secondary'>" . $team_row['team_name'] . "</a><br>";	
-					}
+									$sidebar_teams_top .= '</div>
+							</div>	
+						</div>';
 
-					?>
+		echo $sidebar_teams_top;
+	}
 
-				</div>
+
+	function sidebar_teams_right()
+	{
+		$sidebar_teams_right = '<div class="d-none d-lg-block col-lg-3 col-xl-2 m-3">
+							<div class="border rounded p-3">
+								<h4>Teams</h4>';
+
+								$rows = sidebar_teams();
+												
+								foreach ($rows as $row)
+								{
+									$sidebar_teams_right .= "<a href='/sportradar_coding_session/team.php?team=" . $row['team_name'] . "' class='link-secondary'>" . $row['team_name'] . "</a><br>";
+								}
+
+								$sidebar_teams_right .= '</div>
+							</div>
+						</div>';
+
+		echo $sidebar_teams_right;
+	}
+?>

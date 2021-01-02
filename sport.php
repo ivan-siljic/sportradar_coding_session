@@ -1,32 +1,20 @@
 <?php
 	require_once 'db_connect.php';
 
-	include 'head.php';
+	include_once 'classes.php';
 
-	include 'choose_date.php';
+	include_once 'functions.php';
 
-	if ($_GET) 
-	{
-		$sport = $_GET['sport'];
+	include_once 'head.php';
 
-		$sql = "SELECT sport_event.sport_event_id, sport_event.start_date_time, sport.sport_name, t.team_name home, f.team_name guest  
-				FROM sport_event
-				JOIN team t ON t.team_id = sport_event._fk_team_home
-				JOIN team f ON f.team_id = sport_event._fk_team_guest
-				JOIN league ON f._fk_league_id = league.league_id
-				JOIN sport ON league._fk_sport_id = sport.sport_id
-				WHERE sport.sport_name = '$sport';";
+	include_once 'choose_date.php';
+	
+	include_once 'sidebar_teams.php';
 
-		$result = mysqli_query($connect, $sql);
-					
-	}
+	sidebar_teams_top();
+	
 ?>	
 
-		<div class="row">
-			<div class="d-lg-none col-5 col-md-4 mt-5">
-				<?php include 'sidebar_teams.php'; ?>
-			</div>	
-		</div>
 
 		<div class="row">
 			<div class="col-8">
@@ -37,28 +25,29 @@
 
 				<table class="table">
 
-				<?php
-					
-					include 'table.php';
+					<?php
+							
+						$rows = sport();
+
+						include 'table.php';
 						
-				?>
+					?>
 
 				</table>
 
 				<div class="row my-5">
-					<a class="link-secondary" href=<?php $url = htmlspecialchars($_SERVER['HTTP_REFERER']);
-			            									echo $url; 
-			            									?> >Back</a>
+					<a class="link-secondary" href= <?php back(); ?> >Back</a>
 				</div>
 
 	
 			</div>
 
-			<div class="d-none d-lg-block col-lg-3 col-xl-2 m-3">
-				<?php include 'sidebar_teams.php'; ?>
-			</div>
 
-<?php include 'footer.php'; ?>
+<?php 
+	sidebar_teams_right();
+
+	include 'footer.php'; 
+?>
 	
 		</div>
 
