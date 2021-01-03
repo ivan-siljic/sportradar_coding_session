@@ -6,7 +6,7 @@ abstract class Database
 
 	public $db_host = "localhost";
 
-	public $db_name = "sportradar"; // you must write your db name
+	public $db_name = "sportradar"; 
 
 	public $db_user = "root";
 

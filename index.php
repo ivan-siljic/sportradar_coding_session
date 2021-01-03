@@ -1,17 +1,15 @@
 <?php
-	require_once 'db_connect.php';
+	require_once 'db/db_connect.php'; 			
 
-	include_once 'classes.php';
+	include_once 'controlls/functions.php';		
 
-	include_once 'functions.php';
+	include_once 'templates/head.php';			
 
-	include_once 'head.php';
+	include_once 'templates/choose_date.php';	
 
-	include_once 'choose_date.php';
+	include_once 'templates/sidebar_sport.php';	
 
-	include_once 'sidebar_sport.php';
-
-	sidebar_sport_top();
+	sidebar_sport_top();						
 ?>
 
 		<div class="row">
@@ -25,9 +23,9 @@
 
 					<?php
 
-						$rows = index();
+						$rows = index();	
 															
-						include 'table.php';
+						include 'templates/table.php';
 							
 					?>		
 
@@ -36,9 +34,9 @@
 			</div>
 
 <?php 
-	sidebar_sport_right();
+	sidebar_sport_right();	
 
-	include 'footer.php'; 
+	include 'templates/footer.php'; 
 ?>
 			
 		</div>

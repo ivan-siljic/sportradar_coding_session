@@ -1,15 +1,15 @@
 <?php
-	require_once 'db_connect.php';
+	require_once '../db/db_connect.php';
+	
+	include_once '../controlls/classes.php';
 
-	include_once 'classes.php';
+	include_once '../controlls/functions.php';
 
-	include_once 'functions.php';
+	include_once '../templates/head.php';
 
-	include_once 'head.php';
+	include_once '../templates/choose_date.php';
 
-	include_once 'choose_date.php';
-
-	include_once 'sidebar_sport.php';
+	include_once '../templates/sidebar_sport.php';
 
 	sidebar_sport_top();
 ?>
@@ -18,7 +18,7 @@
 			<div class="col-8">
 				
 				<div class="row text-end my-3">
-					<a href= "create.php" class="link-secondary">Add event</a>
+					<a href= "../create.php" class="link-secondary">Add event</a>
 				</div>
 
 				<table class="table">
@@ -27,7 +27,7 @@
 							
 							$rows = team();
 
-					    	include 'table.php';
+					    	include '../templates/table.php';
 							
 					?>
 
@@ -42,7 +42,7 @@
 <?php 
 	sidebar_sport_right();
 
-	include 'footer.php'; 
+	include '../templates/footer.php'; 
 ?>
 	
 		</div>

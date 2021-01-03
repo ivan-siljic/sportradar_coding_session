@@ -1,4 +1,4 @@
-	<form action="./actions/a_create.php" method= "post">
+	<form action="<?php echo BASE_URL; ?>actions/a_create.php" method= "post">
 			   		   
 		<div class="p-3">
 			<div class="form-group">

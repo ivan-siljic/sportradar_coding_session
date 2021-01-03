@@ -26,14 +26,14 @@
 <div class="container">
 		<div class="row my-3">
 			<nav class="navbar navbar-expand-lg navbar-light">
-				  <a class="navbar-brand" href="index.php"><img src="assets/sportradar-logo.svg" alt="Sportradar Logo" height="25"></a>
+				  <a class="navbar-brand" href="<?php echo BASE_URL; ?>index.php"><img src="<?php echo BASE_URL; ?>assets/sportradar-logo.svg" alt="Sportradar Logo" height="25"></a>
 				  	<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 			      	<span class="navbar-toggler-icon"></span>
 			    	</button>
 					  <div class="collapse navbar-collapse" id="navbarSupportedContent">
 					    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 					        <li class="nav-item">
-								<a class="nav-link active" href="index.php" aria-current="page">Home <span class="sr-only"></span></a>
+								<a class="nav-link active" href="<?php echo BASE_URL; ?>index.php" aria-current="page">Home <span class="sr-only"></span></a>
 							</li>
 							<li class="nav-item">
 								<a class="nav-link" href="https://www.sportradar.com/about-us/group-set-up/" target="_blank">About us</a>

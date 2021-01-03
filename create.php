@@ -1,11 +1,9 @@
 <?php
-	require_once 'db_connect.php';
+	require_once 'db/db_connect.php';
 
-	include_once 'classes.php';
+	include_once 'controlls/functions.php';
 
-	include_once 'functions.php';
-
-	include_once 'head.php';
+	include_once 'templates/head.php';
 ?>
 
 		<div class="row my-5">
@@ -21,12 +19,12 @@
 			   				
 			   				$rows = form_create();
 
-			   				include_once 'form_create.php'; 
+			   				include_once 'templates/form_create.php'; 
 
 			   			?>
 			            
 			        <div class="card-footer ">   
-			         <a class="link-secondary" href= <?php back(); ?> >Back</a>
+			         <a class="link-secondary" href= <?php back(); ?> >Back</a>	
 			        </div>
 
 				</div>
@@ -34,7 +32,7 @@
   			</div>
 		</div>
 			
-<?php include 'footer.php'; ?>
+<?php include 'templates/footer.php'; ?>
 
 	</div>
 

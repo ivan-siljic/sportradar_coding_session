@@ -1,6 +1,8 @@
 <?php
 error_reporting( ~E_DEPRECATED & ~E_NOTICE );
 
+define('BASE_URL', 'http://' . $_SERVER['HTTP_HOST'] . '/sportradar_coding_session/');
+
 $localhost = "localhost";
 $username ="root";
 $password = "";

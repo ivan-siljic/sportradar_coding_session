@@ -35,7 +35,7 @@
 																	<?php echo $rows['guest']; ?>
 										</td>
 										<td>
-											<a href='/sportradar_coding_session/event.php?id=<?php echo $rows['sport_event_id']; ?>' class='link-dark'>select</a>
+											<a href='/sportradar_coding_session/filters/event.php?id=<?php echo $rows['sport_event_id']; ?>' class='link-dark'>select</a>
 										</td>
 									</tr>
 					<?php
@@ -66,7 +66,7 @@
 																	<?php echo $row['guest']; ?>
 										</td>
 										<td>
-											<a href='/sportradar_coding_session/event.php?id=<?php echo $row['sport_event_id']; ?>' class='link-dark'>select</a>
+											<a href='/sportradar_coding_session/filters/event.php?id=<?php echo $row['sport_event_id']; ?>' class='link-dark'>select</a>
 										</td>
 									</tr>
 
