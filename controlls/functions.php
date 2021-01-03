@@ -2,7 +2,7 @@
 
 include_once 'classes.php';
 
-
+// queries from Read object
 function index() 
 {
 	$obj = new Read($table, $fields, $join, $orderBy);
@@ -87,14 +87,14 @@ function date_search()
 	$join[] .= ('JOIN league ON f._fk_league_id = league.league_id');
 	$join[] .= ('JOIN sport ON league._fk_sport_id = sport.sport_id');
 
-	$where = 'WHERE DATE(sport_event.start_date_time) = "' . $_POST['date'] . '"';
+	$where = 'WHERE DATE(sport_event.start_date_time) = "' . $_POST['date'] . '"';		// DATE() returns all events from chosen day regardless of time
 
 	$result = $obj->read($table, $fields, $join, $where);
 
 	return $result;
 }
 
-
+// seperated queries for event.php for readability and usability
 function event() 
 {
 	$obj = new Read($table, $fields, $join, $where);
@@ -222,7 +222,7 @@ function sidebar_sport()
 }
 
 
-function sidebar_teams($sport)
+function sidebar_teams($sport)		// $sport variable to use teams sidebar without GET from sport sidebar
 {
 	$obj = new Read($table, $fields, $join, $where, $orderBy);
 	
@@ -244,20 +244,20 @@ function sidebar_teams($sport)
 	return $result;
 }
 
-
+// queries from Insert object
 function a_create()
 {
 	$obj = new Insert($table, $fields, $values);
 
 	$table = 'sport_event';
 
-	$fields = array('start_date_time, _fk_team_home, _fk_team_guest');
+	$fields = array('start_date_time, _fk_team_home, _fk_team_guest, _fk_location_id');
 
 	$date = $_POST['date'];
 	
 	$time = $_POST['time'];
 
-	$values = array("$date $time", $_POST['home_team'], $_POST['guest_team']);
+	$values = array("$date $time", $_POST['home_team'], $_POST['guest_team'], $_POST['home_team']);
 
 	$result = $obj->insert($table, $fields, $values);
 
@@ -266,8 +266,8 @@ function a_create()
 }
 
 
-
-function back()	
+// general functions
+function back()	// back-link
 {
 	$url = htmlspecialchars($_SERVER['HTTP_REFERER']);
 	
@@ -275,14 +275,14 @@ function back()
 }
 
 
-function multi( $arr ) 
+function multi( $arr ) // checks if array is multidimensional, used in table.php
 { 
     rsort( $arr ); 
     
     return isset( $arr[0] ) && is_array( $arr[0] ); 
 } 
 
-
+// reusable styled succes and fail messages
 function succes( $type )
 {
 	echo '<div class="row">';

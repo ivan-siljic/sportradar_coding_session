@@ -1,6 +1,6 @@
 <?php
 
-abstract class Database 
+abstract class Database 		// made class abstract for security
 
 {
 
@@ -17,20 +17,20 @@ abstract class Database
 
 	public function connect() {
 
-		$this->connection = @mysqli_connect($this->db_host,$this->db_user,$this->db_pw,$this->db_name);
+		$this->connection = @mysqli_connect($this->db_host,$this->db_user,$this->db_pw,$this->db_name); // @ sign for not displaying errors
 
 	}
 }
 
-
+// seperated read and insert in child classes just for fun (and maybe user management)
 	class Read extends Database
 	{
 
 		function read($table, $fields='*', $join='',$where='',$orderBy='') {
 
-			parent::connect(); 
+			parent::connect(); 		// opening db connection								
 
-			$fields = is_array($fields) ? implode(", ", $fields) : $fields;
+			$fields = is_array($fields) ? implode(", ", $fields) : $fields;		// concatenates multiple fields with , if there are any
 
 			$join = is_array($join) ? implode(" ", $join) : $join;
 
@@ -52,15 +52,15 @@ abstract class Database
 
 				} elseif($result->num_rows == 1){
 
-					$row = $result->fetch_assoc();
+					$row = $result->fetch_assoc();				// fetch_assoc returns one row
 
 				} else {
 
-					$row= $result->fetch_all(MYSQLI_ASSOC);
+					$row= $result->fetch_all(MYSQLI_ASSOC);		// fetch-array also possible
 
 				}
 
-			mysqli_close($this->connection);
+			mysqli_close($this->connection);					// closing connection for security
 
 			return $row;
 
@@ -79,7 +79,7 @@ abstract class Database
 
 			$fields = is_array($fields) ? implode(", ", $fields) : $fields;
 
-			$sql = '';
+			$sql = '';				// empty varibale to store results
 
 				if (is_array($values)){
 

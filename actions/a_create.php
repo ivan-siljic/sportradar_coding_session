@@ -22,7 +22,7 @@
 					$result = a_create();
 
 					 if($result === TRUE) {
-				        succes( 'event' );
+				        succes( 'event' );		// reusable succes and fail functions with argument
 				    } else {
 				        fail( 'event' );
 				    }
@@ -40,9 +40,3 @@
 	
 	include '../templates/footer.php'
 ?>
-
-		</div>
-</div>
-
-</body>
-</html>

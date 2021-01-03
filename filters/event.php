@@ -13,7 +13,7 @@
 
 		$sport = $rows['sport_name'];
 
-		sidebar_teams_top($sport);
+		sidebar_teams_top($sport);		// using $sport variable without GET from sport sidebar
 ?>
 
 		<div class="row">
@@ -40,10 +40,3 @@
 
 	include '../templates/footer.php';
 ?>
-	
-		</div>
-
-</div>
-
-</body>
-</html>

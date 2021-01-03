@@ -30,4 +30,11 @@
 
 			</div>
 
-		</footer>	
+		</footer>
+	</div>
+		
+<!-- closing container, body and html -->
+</div>
+
+</body>
+</html>

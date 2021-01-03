@@ -11,7 +11,7 @@
 	
 	include_once '../templates/sidebar_teams.php';
 
-	sidebar_teams_top($sport);
+	sidebar_teams_top($sport);		// $sport variable to use teams sidebar without GET from sport sidebar
 	
 ?>	
 
@@ -48,10 +48,3 @@
 
 	include '../templates/footer.php'; 
 ?>
-	
-		</div>
-
-</div>
-
-</body>
-</html>

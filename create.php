@@ -9,6 +9,7 @@
 		<div class="row my-5">
       		<div class="col-12 col-md-8 col-xl-5 m-auto">
         		
+        		<!-- botstrap card instead of table -->
         		<div class="card m-5">
         			
         			<div class="card-header">
@@ -33,10 +34,3 @@
 		</div>
 			
 <?php include 'templates/footer.php'; ?>
-
-	</div>
-
-</div>
-
-</body>
-</html>

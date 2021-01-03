@@ -44,10 +44,3 @@
 
 	include '../templates/footer.php'; 
 ?>
-	
-		</div>
-
-</div>
-
-</body>
-</html>

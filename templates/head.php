@@ -22,10 +22,13 @@
 
 </head>
 
+<!-- html, body and container opened here and closed in footer -->
 <body>
 <div class="container">
 		<div class="row my-3">
 			<nav class="navbar navbar-expand-lg navbar-light">
+				
+				<!-- relative path with BASE_URL defined in db_connect.php -->
 				  <a class="navbar-brand" href="<?php echo BASE_URL; ?>index.php"><img src="<?php echo BASE_URL; ?>assets/sportradar-logo.svg" alt="Sportradar Logo" height="25"></a>
 				  	<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 			      	<span class="navbar-toggler-icon"></span>
