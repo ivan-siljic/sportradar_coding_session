@@ -11,7 +11,7 @@
 
 									foreach ($rows as $row)
 									{
-										$sidebar_sport_top .= "<a href='/sportradar_coding_session/filters/sport.php?sport=" . $row['sport_name'] . "' class='link-secondary'>" . $row['sport_name'] . "</a><br>";
+										$sidebar_sport_top .= "<a href='". BASE_URL . "filters/sport.php?sport=" . $row['sport_name'] . "' class='link-secondary'>" . $row['sport_name'] . "</a><br>";
 									}
 
 									$sidebar_sport_top .= '</div>
@@ -32,7 +32,7 @@
 												
 								foreach ($rows as $row)
 								{
-									$sidebar_sport_right .= "<a href='/sportradar_coding_session/filters/sport.php?sport=" . $row['sport_name'] . "' class='link-secondary'>" . $row['sport_name'] . "</a><br>";
+									$sidebar_sport_right .= "<a href='" . BASE_URL . "filters/sport.php?sport=" . $row['sport_name'] . "' class='link-secondary'>" . $row['sport_name'] . "</a><br>";
 								}
 
 								$sidebar_sport_right .= '</div>
