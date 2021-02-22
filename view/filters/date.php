@@ -1,19 +1,21 @@
 <?php 
-	require_once 'directory.php'; 
+	require_once '../../directory.php'; 
 
-	include 'view/templates/choose_date.php';
+	include '../../view/templates/choose_date.php';
 ?>
+
 
 		<div class="row">
 			<div class="d-lg-none col-5 col-md-4 mt-5">
 				<div class="border rounded p-3">
 					<h4>Sports</h4>
 
-					<?php include 'view/templates/sidebar_sport.php'; ?>
+					<?php include '../../view/templates/sidebar_sport.php'; ?>
 
 				</div>
 			</div>	
 		</div>
+
 
 		<div class="row">
 			<div class="col-8">
@@ -24,27 +26,31 @@
 
 				<table class="table">
 
-					<?php 
+					<?php
+							
+						$rows = (new SportEvent)->searchDate();
 
-						$rows = (new SportEvent)->fetchSportEvent();
-
-						include 'view/templates/table.php'; 
-
-					?>						
+						include '../../view/templates/table.php';
+						
+					?>
 
 				</table>
 
+				<div class="row my-5">
+					<a class="link-secondary" href= <?php (new GeneralService)->goBack(); ?> >Back</a>
+				</div>
+				
 			</div>
 
 			<div class="d-none d-lg-block col-lg-3 col-xl-2 m-3">
 				<div class="border rounded p-3">
 					<h4>Sports</h4>
 
-					<?php include 'view/templates/sidebar_sport.php'; ?>
+					<?php include '../../view/templates/sidebar_sport.php'; ?>
 
 					</div>
 				</div>
 			</div>
 
-
-<?php include 'view/templates/footer.php'; ?>
+	
+<?php include '../../view/templates/footer.php'; ?>

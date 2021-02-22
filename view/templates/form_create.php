@@ -1,7 +1,35 @@
-	<form action="<?php echo BASE_URL; ?>actions/a_create.php" method= "post">
+	<form action="actions/a_create.php" method= "post">
 			   		   
 		<div class="p-3">
 			<div class="form-group">
+				<div class="row">
+					<div class="col-6 mb-3">
+						<label class="mb-1" for="sport">Sport</label>
+						<select class="form-select border rounded bg-light p-1 text-secondary" onchange="location = this.value;">
+
+								<?php 
+										$rows = (new Sport)->fetchSport();
+
+										foreach ($rows as $row)
+										{
+											if ($row["sport_name"] == $_GET['sport']) 
+											{
+												echo '<option selected>';
+												echo $_GET["sport"];
+												echo '</option>';
+											} else 
+											{
+												echo '<option value="' . BASE_URL . 'view/sport_event/create.php?sport='.$row["sport_name"].'">';
+												echo $row["sport_name"];
+												echo '</option>';
+											}
+										}					
+								?>
+
+						</select>
+					</div>
+				</div>
+
 				<div class="row">
 					<div class="col-6">
 						<label class="mb-1" for="date">Date</label>  
@@ -20,7 +48,11 @@
 						<label class="mb-1" for="home_team">Home</label>
 						<select class="form-select border rounded bg-light p-1 text-secondary" name="home_team">
 							<option selected>Select team</option>
-								<?php foreach ($rows as $row)
+								<?php 
+
+										$rows = (new Team)->fetchTeams($sport);
+
+										foreach ($rows as $row)
 										{
 											echo '<option value="' . $row["team_id"] . '">';
 											echo $row["team_name"];

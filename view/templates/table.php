@@ -11,7 +11,7 @@
 						echo '<div class="row">';
 						echo '<h1 class="text-center text-muted mt-3 mb-5">No data available.</h1></div>';
 
-					} elseif( ! multi( $rows ) )		// checks if the array is singel dimensional
+					} elseif( ! (new GeneralService)->checkMultiArr( $rows ) )		// checks if the array is single dimensional
 						{
 
 					?>	
@@ -43,7 +43,7 @@
 											<?php echo $rows['guest']; ?>
 										</td>
 										<td>
-											<a href='<?php echo BASE_URL; ?>filters/event.php?id=<?php echo $rows['sport_event_id']; ?>' class='link-dark'>select</a>
+											<a href='<?php echo BASE_URL; ?>view/filters/event.php?id=<?php echo $rows['sport_event_id']; ?>' class='link-dark'>select</a>
 										</td>
 									</tr>
 					<?php
@@ -81,7 +81,7 @@
 											<?php echo $row['guest']; ?>
 										</td>
 										<td>
-											<a href='<?php echo BASE_URL; ?>filters/event.php?id=<?php echo $row['sport_event_id']; ?>' class='link-dark'>select</a>
+											<a href='<?php echo BASE_URL; ?>view/filters/event.php?id=<?php echo $row['sport_event_id']; ?>' class='link-dark'>select</a>
 										</td>
 									</tr>
 

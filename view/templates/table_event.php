@@ -1,15 +1,22 @@
 	<tr>
 		<td></td>
 		<td></td>
-		<td class='text-center text-muted' style='PADDING-TOP:3vh'>
-			<?php 
-				echo date("D", strtotime($rows['start_date_time']));
-				echo "<br>";
-				echo "<mark>" . date("d.m.Y", strtotime($rows['start_date_time'])) . "</mark>";
-			?>
+		<td class='text-center text-muted'>
+			<div class="row">
+				<div class="col-12">
+					<?php echo date("D", strtotime($rows['start_date_time'])); ?>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-12">
+					<?php echo "<mark>" . date("d.m.Y", strtotime($rows['start_date_time'])) . "</mark>"; ?>
+				</div>
+			</div>
 		</td>
 		<td></td>
-		<td></td>
+		<td class='text-end'>
+			<a href="<?php echo BASE_URL; ?>view/sport_event/update.php?id=<?php echo $rows['sport_event_id']; ?>" class="btn btn-secondary">edit</a>
+		</td>
 	</tr>
 	
 	<tr class='table-active'>
@@ -40,18 +47,14 @@
 		<td></td>
 		<td class="text-muted text-end">
 			<?php 
-				$rows = event_players_home();
+				$rows = (new Player)->fetchPlayersHome();
 
 				foreach ($rows as $row)
 					{
-						$date_birth = new Datetime($row['date_birth']);
-						$today = new Datetime();
-						$diff = $today->diff($date_birth);
-
 						echo $row['first_name'];
 						echo " ";
 						echo $row['last_name'];
-						echo " (" . $diff->y . ") ";
+						echo " (" . (new Player)->calcAge($row['date_birth']) . ")";
 						echo "<br>";
 					}
 		 	?>
@@ -59,18 +62,14 @@
 		<td></td>
 		<td class="text-muted">
 			<?php 
-				$rows = event_players_guest();
+				$rows = (new Player)->fetchPlayersGuest();
 				
 				foreach ($rows as $row)
 					{
-						$date_birth = new Datetime($row['date_birth']);
-						$today = new Datetime();
-						$diff = $today->diff($date_birth);
-
 						echo $row['first_name'];
 						echo " ";
 						echo $row['last_name'];
-						echo " (" . $diff->y . ") ";
+						echo " (" . (new Player)->calcAge($row['date_birth']) . ")";
 						echo "<br>";
 					}
 		 	?>
@@ -83,7 +82,7 @@
 		</td>
 	</tr>
 
-			<?php $rows = event_stats_home(); ?>
+			<?php $rows = (new Stats)->fetchStatsHome(); ?>
 
 	<tr class='rounded bg-light'>
 		<td></td>
@@ -127,7 +126,7 @@
 			</em></small>
 		</td>
 		<td>
-			<?php $rows = event_stats_guest(); ?>
+			<?php $rows = (new Stats)->fetchStatsGuest(); ?>
 		</td>
 		<td>
 			<small>Matches:</small>
@@ -155,4 +154,9 @@
 			</em></small>
 		</td>
 		<td></td>
+	</tr>
+	<tr>
+		<td colspan="5" class="text-end pt-3">
+			<a href="<?php echo BASE_URL; ?>view/sport_event/delete.php?id=<?php echo $rows['sport_event_id']; ?>" class="btn btn-outline-secondary">delete</a>
+		</td>
 	</tr>

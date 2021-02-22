@@ -1,7 +1,6 @@
 <?php
 
-abstract class Database 		// made class abstract for security
-
+class Database 
 {
 
 	public $db_host = "localhost";
@@ -20,15 +19,12 @@ abstract class Database 		// made class abstract for security
 		$this->connection = @mysqli_connect($this->db_host,$this->db_user,$this->db_pw,$this->db_name); // @ sign for not displaying errors
 
 	}
-}
 
-// seperated read and insert in child classes just for fun (and maybe user management)
-	class Read extends Database
+
+	public function read($table, $fields='*', $join='',$where='',$orderBy='') 
 	{
 
-		function read($table, $fields='*', $join='',$where='',$orderBy='') {
-
-			parent::connect(); 		// opening db connection								
+			$this->connect();								
 
 			$fields = is_array($fields) ? implode(", ", $fields) : $fields;		// concatenates multiple fields with , if there are any
 
@@ -63,19 +59,13 @@ abstract class Database 		// made class abstract for security
 			mysqli_close($this->connection);					// closing connection for security
 
 			return $row;
-
 		}
 
-	}
-
-
-	class Insert extends Database
-	{
 
 		public function insert($table, $fields, $values) 
 		{
 
-			parent::connect();
+			$this->connect();
 
 			$fields = is_array($fields) ? implode(", ", $fields) : $fields;
 
@@ -118,7 +108,71 @@ abstract class Database 		// made class abstract for security
 			return $res;
 
 			mysqli_close($this->connection);
+		}
 
+
+		public function update($table,$set,$condition) 
+		{
+			$this->connect();
+
+			$sql = '';
+			$where = '';
+
+			foreach ($set as $key => $value) 
+			{
+				if($sql != '')
+				{
+			  		$sql .=", ";
+			 	}
+
+				$sql .= $key . "='".$value."' ";
+
+			}
+
+			foreach ($condition as $key => $value) 
+			{
+				if($where != '')
+				{
+			  		$where .=" AND ";
+			 	}
+
+			 	$where .= $key . "='" . $value . "'";
+			 
+			}
+
+			$sql = "UPDATE ".$table." SET ".$sql." WHERE ".$where.";";
+
+			$res = $this->connection->query($sql);
+
+			return $res;
+			
+			mysqli_close($this->connection);
+		}
+
+
+		public function delete($table,$condition) 
+		{
+			$this->connect();
+			
+			$sql='';
+
+			foreach ($condition as $key => $value) 
+			{
+				if($sql != '')
+				{
+  					$sql .=" AND ";
+ 				}
+
+ 				$sql .= $key . "='" . $value . "'";
+ 			}
+
+			$sql="DELETE FROM ".$table." WHERE ".$sql;
+
+			$res = $this->connection->query($sql);
+
+			return $res;
+
+			mysqli_close($this->connection);
 		}
 
 	}
