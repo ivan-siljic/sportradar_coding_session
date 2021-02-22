@@ -1,9 +1,5 @@
 # SPORTRADAR CODING SESSION
 
-#### Project is live on my [CodeFactory Webspace](http://siljic.codefactory.live/sportradar/)
-
-	Please find an export of the database with dummy data and the ERD in the db-folder
-
 
 ### The Challenge
 
