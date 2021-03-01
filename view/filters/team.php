@@ -1,14 +1,22 @@
 <?php 
 	require_once '../../directory.php'; 
 
+	include_once '../../src/Controller/TeamController.php';
+
+	include_once '../../src/Controller/SportController.php';
+
+	include_once '../../src/Controller/SportEventController.php';
+
+	include '../../view/templates/head.php';
+
 	include '../../view/templates/choose_date.php';
 ?>
 
 
-		<div class="row">
-			<div class="d-lg-none col-5 col-md-4 mt-5">
-				<div class="border rounded p-3">
-					<h4>Sports</h4>
+		<div class="row m-auto text-center">
+			<div class="d-lg-none col-12 mt-5 border rounded">
+				<div class="p-3 fs-5 lh-lg">
+					<h2>Sports</h2>
 
 					<?php include '../../view/templates/sidebar_sport.php'; ?>
 
@@ -18,17 +26,17 @@
 
 
 		<div class="row">
-			<div class="col-8">
+			<div class="col-12 col-lg-8">
 				
 				<div class="row text-end my-3">
-					<a href= "<?php echo BASE_URL; ?>view/sport_event/create.php?sport=<?php echo (new Sport)->fetchSportOfTeam()['sport_name']; ?>" class="link-secondary">Add event</a>
+					<a href= "<?php echo BASE_URL; ?>view/sport_event/create.php?sport=<?php echo $fetchSportOfTeam['sport_name']; ?>" class="link-secondary">Add event</a>
 				</div>
 
 				<table class="table">
 
 					<?php
 							
-							$rows = (new SportEvent)->filterTeam();
+							$rows = $filterTeam;
 
 					    	include '../../view/templates/table.php';
 							
@@ -37,7 +45,7 @@
 				</table>
 
 				<div class="row my-5">
-					<a class="link-secondary" href= <?php (new GeneralService)->goBack(); ?> >Back</a>
+					<a class="link-secondary" href= <?php goBack(); ?> >Back</a>
 				</div>
 				
 			</div>

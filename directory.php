@@ -24,6 +24,4 @@
 
 	include_once __DIR__ . '/src/Service/MessageService.php';
 
-	include_once __DIR__ . '/view/templates/head.php';
-
 ?>

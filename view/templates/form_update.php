@@ -3,16 +3,16 @@
 		<div class="p-3">
 			<div class="form-group">
 				<div class="row">
-					<div class="col-6 mb-3">
+					<div class="col-12 mb-3">
 						<label class="mb-1" for="sport">Sport</label>
 						<select class="form-select border rounded bg-light p-1 text-secondary" onchange="location = this.value;">
 
 								<?php 
-										$rows = (new Sport)->fetchSport();
+										$rows = $fetchSport;
 
 										foreach ($rows as $row)
 										{
-											if ($row["sport_name"] == (new SportEvent)->filterEvent()["sport_name"]) 
+											if ($row["sport_name"] == $sport["sport_name"]) 
 											{
 												echo '<option selected>';
 												echo $row["sport_name"];
@@ -31,25 +31,25 @@
 				</div>
 				
 				<div class="row">
-					<div class="col-6">
+					<div class="col-12 mb-3 mb-lg-0 col-lg-6">
 						<label class="mb-1" for="date">Date</label>  
-						<input class="form-control border rounded bg-light p-1 text-secondary" type="date" name="date" value="<?php echo date("Y-m-d", strtotime( (new SportEvent)->filterEvent()["start_date_time"] )); ?>">
+						<input class="form-control border rounded bg-light p-1 text-secondary" type="date" name="date" value="<?php echo date("Y-m-d", strtotime( $sport["start_date_time"] )); ?>">
 					</div>
 			           				
-					<div class="col-6">
+					<div class="col-12 mb-3 mb-lg-0 col-lg-6">
 						<label class="mb-1" for="time">Time</label>
-						<input class="form-control border rounded bg-light p-1 text-secondary" type="time" name="time" value="<?php echo date("H:i", strtotime( (new SportEvent)->filterEvent()["start_date_time"] )); ?>">
+						<input class="form-control border rounded bg-light p-1 text-secondary" type="time" name="time" value="<?php echo date("H:i", strtotime( $sport["start_date_time"] )); ?>">
 					</div>    
 				</div>
 
 				<div class="row">
-					<div class="col-6 my-3">
+					<div class="col-12 mb-3 my-lg-3 col-lg-6">
 						<label class="mb-1" for="home_team">Home</label>
 						<select class="form-select border rounded bg-light p-1 text-secondary" name="home_team">
 							<option selected>Select team</option>
 								<?php 
 
-										$rows = (new Team)->fetchTeams( (new SportEvent)->filterEvent()["sport_name"] );
+										$rows = fetchTeams($sport["sport_name"]);
 
 										foreach ($rows as $row)
 										{
@@ -63,7 +63,7 @@
 						</select>
 					</div>
 
-					<div class="col-6 my-3">
+					<div class="col-12 mb-3 my-lg-3 col-lg-6">
 						<label class="mb-1" for="guest_team">Guest</label>
 						<select class="form-select border rounded bg-light p-1 text-secondary" name="guest_team">
 							<option selected>Select team</option>
@@ -80,7 +80,7 @@
 					</div>					           			
 				</div>
 					<hr>
-					<input type="hidden" name="id" value="<?php echo (new SportEvent)->filterEvent()['sport_event_id']; ?>">
+					<input type="hidden" name="id" value="<?php echo $sport['sport_event_id']; ?>">
 					<button type ="submit" class="btn btn-dark">save</button>      			
 			</div>
 		</div>

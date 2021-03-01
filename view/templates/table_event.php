@@ -45,31 +45,34 @@
 
 	<tr>
 		<td></td>
-		<td class="text-muted text-end">
+		<td class="text-muted text-end text-nowrap">
 			<?php 
-				$rows = (new Player)->fetchPlayersHome();
+
+				$rows = $fetchPlayersHome;
 
 				foreach ($rows as $row)
 					{
+						
 						echo $row['first_name'];
 						echo " ";
 						echo $row['last_name'];
-						echo " (" . (new Player)->calcAge($row['date_birth']) . ")";
+						echo " (" . calcAge( $row['date_birth'] ) .")";
 						echo "<br>";
 					}
 		 	?>
 		</td>
 		<td></td>
-		<td class="text-muted">
+		<td class="text-muted text-nowrap">
 			<?php 
-				$rows = (new Player)->fetchPlayersGuest();
+
+				$rows = $fetchPlayersGuest;
 				
 				foreach ($rows as $row)
 					{
 						echo $row['first_name'];
 						echo " ";
 						echo $row['last_name'];
-						echo " (" . (new Player)->calcAge($row['date_birth']) . ")";
+						echo " (" . calcAge( $row['date_birth'] ) . ")";
 						echo "<br>";
 					}
 		 	?>
@@ -82,7 +85,7 @@
 		</td>
 	</tr>
 
-			<?php $rows = (new Stats)->fetchStatsHome(); ?>
+			<?php $rows = $fetchStatsHome; ?>
 
 	<tr class='rounded bg-light'>
 		<td></td>
@@ -126,7 +129,7 @@
 			</em></small>
 		</td>
 		<td>
-			<?php $rows = (new Stats)->fetchStatsGuest(); ?>
+			<?php $rows = $fetchStatsGuest; ?>
 		</td>
 		<td>
 			<small>Matches:</small>

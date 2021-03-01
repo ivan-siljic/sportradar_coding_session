@@ -1,4 +1,12 @@
-<?php require_once '../../../directory.php'; ?>
+<?php 
+	require_once '../../../directory.php'; 
+
+	include_once '../../../src/Controller/SportController.php';
+
+	include_once '../../../src/Controller/SportEventController.php';
+
+	include '../../../view/templates/head.php';
+?>
 
 
 		<div class="row">
@@ -18,18 +26,19 @@
 
 				<?php
 					
-					$result = (new SportEvent)->updateSportEvent();
-
-					if($result === TRUE) {
-				        (new MessageService)->displaySucces( 'event' );		// reusable succes and fail functions with argument
-				    } else {
-				        (new MessageService)->displayFail( 'event' );
-				    }
+					if($updateSportEvent === TRUE) 
+					{
+						echo displaySuccess( 'Event updated successfully!' );
+					} 
+					else 
+					{
+						echo displayFail( 'Failed to update event.' );
+					}
 				
 				?>
 
 				<div class="row my-5">
-					<a class="link-secondary" href= <?php (new GeneralService)->goBack(); ?> >Back</a>
+					<a class="link-secondary" href= <?php goBack(); ?> >Back</a>
 				</div>
 
 			</div>

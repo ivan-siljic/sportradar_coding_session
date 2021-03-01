@@ -41,20 +41,6 @@ class Player extends Database
 
 		return $result;
 	}
-
-
-	function calcAge($row)
-	{
-		$date_birth = new Datetime($row);
-
-		$today = new Datetime();
-
-		$diff = $today->diff($date_birth);
-
-		$result = $diff->y;
-		
-		return $result;
-	}
 }
 
 ?>

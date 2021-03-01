@@ -2,6 +2,7 @@
 
 include_once 'Database.php';
 
+
 class SportEvent extends Database
 {
 	function fetchSportEvent() 
@@ -95,7 +96,7 @@ class SportEvent extends Database
 		return $result;
 	}
 
-// seperated queries for event.php for readability and usability
+
 	function filterEvent() 
 	{
 		$obj = new Database($table, $fields, $join, $where);
